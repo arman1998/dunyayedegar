@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>استودیو | دنیای دیگر</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap">
+<style>
+:root{--bg:#0c0b10;--card:#16141d;--tx:#ece8dd;--mu:#a39fb2;--gd:#c9a24a;--ln:#2a2733;--rd:#e5594f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.7 Vazirmatn,Tahoma,sans-serif}
+header{display:flex;gap:6px;align-items:center;overflow-x:auto;padding:10px 14px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--bg);z-index:5}
+header b{color:var(--gd);margin-inline-end:10px;white-space:nowrap}
+.b,header button{font:inherit;font-size:14px;background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+header .on,.b.g{background:var(--gd);color:#0c0b10;border-color:var(--gd)}.b.r{color:var(--rd)}
+main{max-width:900px;margin:auto;padding:18px}h2{margin:6px 0 16px}
+input,select,textarea{font:inherit;width:100%;padding:9px 12px;background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:8px;margin:4px 0 12px}
+input[type=checkbox]{width:auto;margin-inline-end:8px}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.st div{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px;text-align:center;color:var(--mu)}.st b{display:block;font-size:30px;color:var(--gd)}
+.row{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:10px;margin-bottom:10px;flex-wrap:wrap}
+.row img{width:64px;height:64px;object-fit:cover;border-radius:8px;background:#000}.row .i{flex:1;min-width:150px}.row small{color:var(--mu)}
+.tag{font-size:12px;padding:1px 8px;border-radius:99px;border:1px solid var(--ln)}.tag.p{border-color:var(--gd);color:var(--gd)}
+.bar{display:flex;gap:8px;flex-wrap:wrap}.bar>*{flex:1;min-width:120px}
+dialog{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:14px;width:min(560px,94vw)}dialog::backdrop{background:#000a}dialog img,dialog iframe{width:100%;max-height:70vh;object-fit:contain;border:0}dialog iframe{aspect-ratio:16/9}
+#login{max-width:340px;margin:12vh auto;padding:20px}#ts{position:fixed;bottom:16px;inset-inline:16px;background:var(--gd);color:#0c0b10;padding:10px 16px;border-radius:10px;z-index:9;text-align:center}[hidden]{display:none!important}
+</style></head><body>
+<div id="login" hidden><h2>ورود به استودیو</h2><label>ایمیل<input id="em" type="email" autocomplete="username"></label><label>رمز عبور<input id="pw" type="password" autocomplete="current-password"></label><button class="b g" id="lg" style="width:100%">ورود</button></div>
+<div id="app" hidden>
+<header><b>استودیو</b><button data-v="ov">نمای کلی</button><button data-v="ct">محتوا</button><button data-v="up">آپلود تصویر</button><button data-v="yt">ویدیوی یوتیوب</button><button data-v="ca">دسته‌ها</button><button data-v="se">تنظیمات سایت</button><button id="out">خروج</button></header>
+<main>
+<section id="v-ov"><h2>نمای کلی</h2><div class="st" id="stt"></div></section>
+<section id="v-ct" hidden><h2>محتوا</h2><div class="bar"><input id="q" placeholder="جستجو…"><select id="fc"></select><select id="fs"><option value="">همه‌ی وضعیت‌ها</option><option value="p">منتشرشده</option><option value="d">پیش‌نویس</option></select><select id="fo"><option value="n">جدیدترین</option><option value="o">قدیمی‌ترین</option><option value="t">بر اساس عنوان</option></select></div><div id="ls" style="margin-top:12px"></div></section>
+<section id="v-up" hidden><h2>آپلود تصویر</h2><label>انتخاب تصویر (می‌توانید چند تصویر را با هم انتخاب کنید)<input id="uf" type="file" accept="image/*" multiple></label><label>دسته<select id="uc"></select></label><label><input type="checkbox" id="up">بلافاصله منتشر شود</label><button class="b g" id="ub">آپلود</button><p id="um"></p></section>
+<section id="v-yt" hidden><h2>افزودن ویدیوی یوتیوب</h2><label>لینک ویدیو<input id="yl" placeholder="https://www.youtube.com/watch?v=…" dir="ltr"></label><img id="yp" alt="" hidden style="max-width:260px;border-radius:8px"><label>عنوان<input id="yn"></label><label>دسته<select id="yc"></select></label><label><input type="checkbox" id="yu" checked>بلافاصله منتشر شود</label><button class="b g" id="yb">افزودن</button></section>
+<section id="v-ca" hidden><h2>دسته‌ها</h2><div class="bar"><input id="cn" placeholder="نام دسته‌ی جدید"><button class="b g" id="cb">افزودن</button></div><div id="cl" style="margin-top:12px"></div></section>
+<section id="v-se" hidden><h2>تنظیمات سایت</h2><label>جمله‌ی زیر عنوان صفحه‌ی اصلی<input id="s1"></label><label>درباره من (فارسی؛ هر خط یک پاراگراف)<textarea id="s2" rows="9"></textarea></label><label>About me (English; one paragraph per line)<textarea id="s3" rows="9" dir="ltr"></textarea></label><label>شبکه‌ها و راه‌های ارتباط (هر خط: نام | لینک)<textarea id="s4" rows="9" dir="ltr"></textarea></label><button class="b g" id="sb">ذخیره</button></section>
+</main></div>
+<dialog id="dl"><div id="dc"></div></dialog><div id="ts" hidden></div>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const say=t=>{const e=$('#ts');e.textContent=t;e.hidden=false;clearTimeout(say.t);say.t=setTimeout(()=>e.hidden=true,4000)};
+if(!window.CFG||/YOUR/.test(CFG.url)){document.body.innerHTML='<p style="padding:30px">ابتدا فایل config.js را با آدرس و کلید پروژه‌ی Supabase پر کنید.</p>';throw new Error('config')}
+const sb=supabase.createClient(CFG.url,CFG.key),BK=sb.storage.from('media');
+let items=[],cats=[],S={};
+const thumb=i=>i.kind==='youtube'?`https://img.youtube.com/vi/${i.ref}/hqdefault.jpg`:BK.getPublicUrl(i.ref).data.publicUrl;
+const go=n=>{$$('main section').forEach(s=>s.hidden=s.id!=='v-'+n);$$('header [data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===n))};
+$$('header [data-v]').forEach(b=>b.onclick=()=>go(b.dataset.v));
+async function start(){const{data,error}=await sb.rpc('is_admin');if(error||!data){await sb.auth.signOut();$('#login').hidden=false;$('#app').hidden=true;say(error?error.message:'این حساب اجازه‌ی مدیریت ندارد.');return}
+ $('#login').hidden=true;$('#app').hidden=false;go('ov');load()}
+$('#lg').onclick=async()=>{const{error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});error?say('ورود ناموفق: '+error.message):start()};
+$('#out').onclick=async()=>{await sb.auth.signOut();location.reload()};
+(async()=>{const{data}=await sb.auth.getSession();data.session?start():$('#login').hidden=false})();
+async function load(){const[a,b,c]=await Promise.all([sb.from('items').select('*').order('created_at',{ascending:false}),sb.from('categories').select('*').order('sort'),sb.from('settings').select('*')]);
+ const er=a.error||b.error||c.error;if(er){say('خطا در خواندن اطلاعات: '+er.message);return}
+ items=a.data;cats=b.data;S=Object.fromEntries(c.data.map(r=>[r.key,r.value]));draw()}
+function draw(){
+ const n=(f)=>items.filter(f).length;
+ $('#stt').innerHTML=[['کل محتوا',items.length],['منتشرشده',n(i=>i.published)],['پیش‌نویس',n(i=>!i.published)],['تصویر',n(i=>i.kind==='image')],['ویدیو',n(i=>i.kind==='youtube')],['منتخب',n(i=>i.featured)]].map(x=>`<div><b>${x[1]}</b>${x[0]}</div>`).join('');
+ const o=cats.map(c=>`<option>${esc(c.name)}</option>`).join('');
+ $('#uc').innerHTML=o;$('#yc').innerHTML=o;const v=$('#fc').value;$('#fc').innerHTML='<option value="">همه‌ی دسته‌ها</option>'+o;$('#fc').value=v;
+ $('#cl').innerHTML=cats.map(c=>`<div class="row"><div class="i">${esc(c.name)}</div><button class="b r" data-n="${esc(c.name)}">حذف</button></div>`).join('');
+ $('#s1').value=S.tagline||'';$('#s2').value=S.about_fa||'';$('#s3').value=S.about_en||'';$('#s4').value=S.socials||'';
+ list()}
+function list(){
+ const q=$('#q').value.toLowerCase(),c=$('#fc').value,s=$('#fs').value,o=$('#fo').value;
+ const r=items.filter(i=>(!q||(i.title+' '+i.description).toLowerCase().includes(q))&&(!c||i.category===c)&&(!s||(s==='p')===i.published));
+ r.sort((x,y)=>o==='t'?x.title.localeCompare(y.title):o==='o'?x.created_at.localeCompare(y.created_at):y.created_at.localeCompare(x.created_at));
+ $('#ls').innerHTML=r.map(i=>`<div class="row"><img src="${esc(thumb(i))}" alt=""><div class="i"><b>${esc(i.title)}</b><br><small>${esc(i.category||'—')} · ${i.kind==='youtube'?'ویدیو':'تصویر'}</small> <span class="tag ${i.published?'p':''}">${i.published?'منتشرشده':'پیش‌نویس'}</span>${i.featured?' <span class="tag p">★ منتخب</span>':''}</div><button class="b" data-a="pv" data-id="${i.id}">پیش‌نمایش</button><button class="b" data-a="ed" data-id="${i.id}">ویرایش</button><button class="b g" data-a="pb" data-id="${i.id}">${i.published?'لغو انتشار':'انتشار'}</button><button class="b r" data-a="rm" data-id="${i.id}">حذف</button></div>`).join('')||'<p>موردی پیدا نشد.</p>'}
+['q','fc','fs','fo'].forEach(k=>$('#'+k).oninput=list);
+$('#ls').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const i=items.find(x=>x.id===b.dataset.id),a=b.dataset.a;
+ if(a==='pv'){$('#dc').innerHTML=(i.kind==='youtube'?`<iframe src="https://www.youtube-nocookie.com/embed/${esc(i.ref)}" allowfullscreen title=""></iframe>`:`<img src="${esc(thumb(i))}" alt="">`)+`<h3>${esc(i.title)}</h3><p>${esc(i.description)}</p><button class="b" onclick="dl.close()">بستن</button>`;$('#dl').showModal()}
+ if(a==='pb'){const{error}=await sb.from('items').update({published:!i.published}).eq('id',i.id);error?say(error.message):(say(i.published?'لغو انتشار شد':'منتشر شد'),load())}
+ if(a==='rm'&&confirm(`«${i.title}» برای همیشه حذف شود؟`)){if(i.kind==='image'){const r=await BK.remove([i.ref]);if(r.error)return say(r.error.message)}const{error}=await sb.from('items').delete().eq('id',i.id);error?say(error.message):(say('حذف شد'),load())}
+ if(a==='ed'){$('#dc').innerHTML=`<h3>ویرایش</h3><label>عنوان<input id="et" value="${esc(i.title)}"></label><label>توضیح<textarea id="ed" rows="4">${esc(i.description)}</textarea></label><label>دسته<select id="ec">${cats.map(c=>`<option ${c.name===i.category?'selected':''}>${esc(c.name)}</option>`).join('')}</select></label><label><input type="checkbox" id="ef" ${i.featured?'checked':''}>منتخب (نمایش در ابتدای صفحه)</label><div class="bar"><button class="b g" id="es">ذخیره</button><button class="b" onclick="dl.close()">انصراف</button></div>`;$('#dl').showModal();
+  $('#es').onclick=async()=>{const{error}=await sb.from('items').update({title:$('#et').value.trim()||i.title,description:$('#ed').value,category:$('#ec').value,featured:$('#ef').checked}).eq('id',i.id);error?say(error.message):($('#dl').close(),say('ذخیره شد'),load())}}};
+async function shrink(f){const m=await createImageBitmap(f),k=Math.min(1,1800/Math.max(m.width,m.height)),c=document.createElement('canvas');c.width=Math.round(m.width*k);c.height=Math.round(m.height*k);c.getContext('2d').drawImage(m,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,'image/webp',.85))}
+$('#ub').onclick=async()=>{const fs=[...$('#uf').files];if(!fs.length)return say('ابتدا تصویر انتخاب کنید');$('#ub').disabled=true;let ok=0;
+ for(const f of fs){$('#um').textContent=`در حال آپلود ${ok+1} از ${fs.length}…`;try{const blob=await shrink(f),p=`${new Date().getFullYear()}/${crypto.randomUUID()}.webp`;
+  const u=await BK.upload(p,blob,{contentType:'image/webp',cacheControl:'31536000'});if(u.error)throw u.error;
+  const r=await sb.from('items').insert({kind:'image',title:f.name.replace(/\.[^.]+$/,''),category:$('#uc').value,ref:p,published:$('#up').checked});if(r.error){await BK.remove([p]);throw r.error}ok++}catch(e){say(f.name+': '+e.message)}}
+ $('#ub').disabled=false;$('#um').textContent=`${ok} تصویر آپلود شد. از بخش «محتوا» عنوان را ویرایش کنید.`;$('#uf').value='';load()};
+const yid=u=>(u.match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/)||[])[1];
+$('#yl').oninput=()=>{const d=yid($('#yl').value);$('#yp').hidden=!d;if(d)$('#yp').src=`https://img.youtube.com/vi/${d}/hqdefault.jpg`};
+$('#yb').onclick=async()=>{const d=yid($('#yl').value);if(!d)return say('لینک یوتیوب معتبر نیست');
+ const{error}=await sb.from('items').insert({kind:'youtube',title:$('#yn').value.trim()||'ویدیو',category:$('#yc').value,ref:d,published:$('#yu').checked});
+ error?say(error.message):(say('ویدیو اضافه شد'),$('#yl').value='',$('#yn').value='',$('#yp').hidden=true,load())};
+$('#cb').onclick=async()=>{const n=$('#cn').value.trim();if(!n)return;const{error}=await sb.from('categories').insert({name:n,sort:cats.length+1});error?say(error.message):($('#cn').value='',load())};
+$('#cl').onclick=async e=>{const b=e.target.closest('button');if(b&&confirm(`دسته‌ی «${b.dataset.n}» حذف شود؟ (آثار داخل آن حذف نمی‌شوند)`)){const{error}=await sb.from('categories').delete().eq('name',b.dataset.n);error?say(error.message):load()}};
+$('#sb').onclick=async()=>{const{error}=await sb.from('settings').upsert([{key:'tagline',value:$('#s1').value},{key:'about_fa',value:$('#s2').value},{key:'about_en',value:$('#s3').value},{key:'socials',value:$('#s4').value}]);error?say(error.message):say('ذخیره شد')};
+</script></body></html>

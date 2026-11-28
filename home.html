@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دنیای دیگر | Dunyaye Degar</title>
+<meta name="description" content="دنیای دیگر (Dunyaye Degar): نمونه‌کارهای حسیب‌الله آرمان، طراح گرافیک. پوستر، لوگو، فتوشاپ، ایلاستریتور و ویدیوهای یوتیوب.">
+<meta property="og:title" content="دنیای دیگر | Dunyaye Degar"><meta property="og:type" content="website">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800;900&display=swap">
+<style>
+:root{--bg:#0c0b10;--card:#16141d;--tx:#ece8dd;--mu:#a39fb2;--gd:#c9a24a;--ln:#2a2733}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1100px 520px at 85% -8%,#2b2142,transparent 60%),var(--bg);color:var(--tx);font:17px/1.9 Vazirmatn,Tahoma,sans-serif}
+a{color:inherit}:focus-visible{outline:3px solid var(--gd);outline-offset:3px}
+.w{max-width:1080px;margin:auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+nav b{color:var(--gd);font-weight:900;font-size:20px}nav a{margin-inline-start:18px;text-decoration:none;color:var(--mu);font-size:15px}
+.hero{padding:90px 0 80px;text-align:center}
+h1{font-size:clamp(50px,12vw,112px);font-weight:900;line-height:1.15;margin:0;background:linear-gradient(180deg,#f5e6b8,var(--gd));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mu);max-width:44ch;margin:14px auto 28px}
+.btn{display:inline-block;padding:9px 24px;border:1px solid var(--gd);border-radius:999px;text-decoration:none;color:var(--gd);margin:4px;background:none;font:inherit;font-size:15px;cursor:pointer}
+.btn.m,.chips .on{background:var(--gd);color:#0c0b10}
+section{padding:64px 0;border-top:1px solid var(--ln)}h2{font-size:34px;font-weight:900;margin:0 0 22px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chips button{font:inherit;font-size:14px;padding:5px 18px;border-radius:999px;border:1px solid var(--ln);background:none;color:var(--tx);cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.it{background:var(--card);border:1px solid var(--ln);border-radius:12px;overflow:hidden;cursor:pointer;padding:0;color:inherit;font:inherit;text-align:start;display:block}
+.it img{width:100%;aspect-ratio:4/5;object-fit:contain;background:#000;display:block}
+.vg{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}.vg img{aspect-ratio:16/9;object-fit:cover}
+.it span{display:block;padding:10px 14px;font-size:15px}
+.ab{max-width:68ch;color:var(--mu)}.ab p:first-child{font-size:20px;color:var(--tx)}.ab p:last-child{color:var(--gd);font-weight:800;border-inline-start:3px solid var(--gd);padding-inline-start:14px}
+.tg{margin-bottom:18px}.tg button{font:inherit;font-size:14px;padding:4px 16px;border-radius:999px;border:1px solid var(--ln);background:none;color:var(--tx);cursor:pointer;margin-inline-end:6px}.tg .on{border-color:var(--gd);color:var(--gd)}
+dialog{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:14px;width:min(900px,94vw);padding:14px}dialog::backdrop{background:#000c}
+dialog img{width:100%;max-height:78vh;object-fit:contain}dialog iframe{width:100%;aspect-ratio:16/9;border:0}
+footer{text-align:center;color:var(--mu);font-size:14px;padding:30px 0}.soc{text-align:center}[hidden]{display:none!important}
+</style></head><body>
+<div class="w"><nav><b>دنیای دیگر</b><div><a href="#about">درباره من</a><a href="#gallery">آثار</a><a href="#videos">ویدیوها</a><a href="#contact">ارتباط</a></div></nav>
+<header class="hero"><h1>دنیای دیگر</h1><p id="tag"></p><a class="btn m" href="#gallery">دیدن آثار</a><a class="btn" href="#videos">ویدیوها</a></header>
+<section id="about"><h2>درباره من</h2><div class="tg"><button class="on" data-l="fa">فارسی</button><button data-l="en">English</button></div><div class="ab" id="afa"></div><div class="ab" id="aen" lang="en" dir="ltr" hidden></div></section>
+<section id="gallery"><h2>آثار طراحی</h2><div class="chips" id="chips"></div><div class="grid" id="gal"><p>در حال بارگذاری…</p></div></section>
+<section id="videos"><h2>ویدیوها</h2><div class="grid vg" id="vid"></div></section>
+<section id="contact" class="soc"><h2>ارتباط</h2><div id="soc"></div></section></div>
+<footer>Dunyaye Degar © <span id="yr"></span></footer>
+<dialog id="dl"><button class="btn" id="cl">بستن</button><div id="dc"></div></dialog>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+$('#yr').textContent=new Date().getFullYear();
+(async()=>{
+if(!window.CFG||/YOUR/.test(CFG.url)){$('#gal').textContent='فایل config.js هنوز تنظیم نشده است.';return}
+const sb=supabase.createClient(CFG.url,CFG.key);
+const[a,b,c]=await Promise.all([sb.from('items').select('*').eq('published',true).order('featured',{ascending:false}).order('created_at',{ascending:false}),sb.from('categories').select('*').order('sort'),sb.from('settings').select('*')]);
+if(a.error){$('#gal').textContent='خطا در بارگذاری آثار.';return}
+const S=Object.fromEntries((c.data||[]).map(r=>[r.key,r.value])),it=a.data,cats=b.data||[];
+const url=i=>sb.storage.from('media').getPublicUrl(i.ref).data.publicUrl;
+$('#tag').textContent=S.tagline||'';
+const par=t=>(t||'').split(/\n+/).filter(Boolean).map(x=>'<p>'+esc(x)+'</p>').join('');
+$('#afa').innerHTML=par(S.about_fa);$('#aen').innerHTML=par(S.about_en);
+document.querySelectorAll('.tg button').forEach(x=>x.onclick=()=>{document.querySelectorAll('.tg button').forEach(y=>y.classList.toggle('on',y===x));$('#afa').hidden=x.dataset.l!=='fa';$('#aen').hidden=x.dataset.l!=='en'});
+const imgs=it.filter(i=>i.kind==='image'),vids=it.filter(i=>i.kind==='youtube');
+function gal(f){const r=imgs.filter(i=>f==='*'||(f==='★'?i.featured:i.category===f));$('#gal').innerHTML=r.map(i=>`<button class="it" data-id="${i.id}"><img loading="lazy" src="${esc(url(i))}" alt="${esc(i.title)}"><span>${esc(i.title)}</span></button>`).join('')||'<p>هنوز اثری منتشر نشده است.</p>'}
+const used=cats.map(x=>x.name).filter(n=>imgs.some(i=>i.category===n)),fs=['*',...(imgs.some(i=>i.featured)?['★']:[]),...used];
+$('#chips').innerHTML=fs.map((n,k)=>`<button data-f="${esc(n)}" class="${k?'':'on'}">${n==='*'?'همه':n==='★'?'منتخب':esc(n)}</button>`).join('');
+$('#chips').onclick=e=>{const x=e.target.closest('button');if(!x)return;document.querySelectorAll('#chips button').forEach(y=>y.classList.toggle('on',y===x));gal(x.dataset.f)};
+gal('*');
+$('#vid').innerHTML=vids.map(i=>`<button class="it" data-id="${i.id}"><img loading="lazy" src="https://img.youtube.com/vi/${esc(i.ref)}/hqdefault.jpg" alt="${esc(i.title)}"><span>${esc(i.title)}</span></button>`).join('')||'<p>هنوز ویدیویی منتشر نشده است.</p>';
+const open=e=>{const x=e.target.closest('.it');if(!x)return;const i=it.find(v=>v.id===x.dataset.id);$('#dc').innerHTML=i.kind==='youtube'?`<iframe src="https://www.youtube-nocookie.com/embed/${esc(i.ref)}?autoplay=1" allow="autoplay;encrypted-media;fullscreen" title="${esc(i.title)}"></iframe>`:`<img src="${esc(url(i))}" alt="${esc(i.title)}">`+(i.description?`<p>${esc(i.description)}</p>`:'');$('#dl').showModal()};
+$('#gal').onclick=open;$('#vid').onclick=open;
+$('#cl').onclick=()=>$('#dl').close();$('#dl').onclose=()=>$('#dc').innerHTML='';
+$('#soc').innerHTML=(S.socials||'').split('\n').map(l=>l.split('|').map(s=>s.trim())).filter(p=>p[1]&&/^(https?:|tel:|mailto:)/.test(p[1])).map(p=>`<a class="btn" target="_blank" rel="noopener" href="${esc(p[1])}">${esc(p[0])}</a>`).join('');
+})();
+</script></body></html>
